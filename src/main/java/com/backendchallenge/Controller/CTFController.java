@@ -27,4 +27,8 @@ public class CTFController {
         return this.ctfRepository.findById(id).orElse(null);    
     }
 
+    @GetMapping("/byType/{type}")
+    public Collection<CTF> byType(@PathVariable String type){
+        return this.ctfRepository.findAllByTypeContains(type);
+    }
 }
