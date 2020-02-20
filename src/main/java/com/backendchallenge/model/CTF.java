@@ -3,12 +3,14 @@ package com.backendchallenge.model;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Data
 @Document(collection = "CTF")
 public class CTF {
     @Id
     private String id;
+    @Field("anime_id")
     private int animeId;
     private String name;
     private String genre;
