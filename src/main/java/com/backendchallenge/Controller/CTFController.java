@@ -18,4 +18,6 @@ public class CTFController {
     }
     @GetMapping("/all")
     public Collection<CTF> all(){ return this.mongoTemplate.findAll(CTF.class);}
+
+
 }
