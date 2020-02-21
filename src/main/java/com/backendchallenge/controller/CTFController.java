@@ -1,19 +1,17 @@
-package com.backendchallenge.Controller;
+package com.backendchallenge.controller;
 
 import com.backendchallenge.model.CTF;
-import com.backendchallenge.persistence.CTFRepository;
+import com.backendchallenge.service.CTFService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
 import java.util.List;
 
 @RestController
-@RequestMapping("CTF/api")
+@RequestMapping("/CTF")
 public class CTFController {
     @Autowired
     private CTFService ctfService;

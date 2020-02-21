@@ -3,10 +3,12 @@ package com.backendchallenge.service;
 import com.backendchallenge.model.CTF;
 import com.backendchallenge.repository.CTFRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class CTFServiceImpl implements CTFService {
     @Autowired
     private CTFRepository ctfRepository;
