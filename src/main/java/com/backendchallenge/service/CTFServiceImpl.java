@@ -1,7 +1,7 @@
 package com.backendchallenge.service;
 
 import com.backendchallenge.model.CTF;
-import com.backendchallenge.model.CTFRepository;
+import com.backendchallenge.repository.CTFRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;

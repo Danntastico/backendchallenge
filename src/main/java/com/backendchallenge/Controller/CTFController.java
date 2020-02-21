@@ -1,7 +1,7 @@
 package com.backendchallenge.Controller;
 
 import com.backendchallenge.model.CTF;
-import com.backendchallenge.model.CTFRepository;
+import com.backendchallenge.repository.CTFRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
