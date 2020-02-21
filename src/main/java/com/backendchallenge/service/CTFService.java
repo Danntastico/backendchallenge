@@ -1,4 +1,6 @@
-package com.backendchallenge.model;
+package com.backendchallenge.service;
+
+import com.backendchallenge.model.CTF;
 
 import java.util.List;
 
