@@ -1,4 +1,4 @@
-package com.backendchallenge.persistence;
+package com.backendchallenge.model;
 
 import com.backendchallenge.model.CTF;
 import org.springframework.data.mongodb.repository.MongoRepository;

@@ -1,8 +1,7 @@
 package com.backendchallenge.Controller;
 
 import com.backendchallenge.model.CTF;
-import com.backendchallenge.persistence.CTFRepository;
-import org.springframework.data.mongodb.core.MongoTemplate;
+import com.backendchallenge.model.CTFRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
