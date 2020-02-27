@@ -3,10 +3,7 @@ package com.backendchallenge.controller;
 import com.backendchallenge.model.CTF;
 import com.backendchallenge.service.CTFService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,8 +14,8 @@ public class CTFController {
     private CTFService ctfService;
 
     @GetMapping("GET/all")
-    public List<CTF> getAllAnimes(){
-        return ctfService.findAll();
+    public List<CTF> getAllAnimes(@RequestParam(name = "limit", required = false) Integer limit, @RequestParam(name = "genre", required = false) String genre){
+        return ctfService.findAll(limit, genre);
     }
 
     @GetMapping("GET/anime")
