@@ -74,12 +74,13 @@ public class CTFServiceTest {
         idList.add(testId1);
         idList.add(testId2);
 
-        Mockito.when(ctfService.findAll()).thenReturn(ctfList);
+        //Mockito.when(ctfService.findAll()).thenReturn(ctfList);
 
         Mockito.when(ctfService.getAllIdAnimes()).thenReturn(idList);
 
         Mockito.when(ctfService.findAnimeById(testId1)).thenReturn(dataTest);
     }
+    /*
     @Test
     public void testFindAll_thenctfListShouldBeReturned(){
         List<CTF> foundCTF = ctfService.findAll();
@@ -87,7 +88,7 @@ public class CTFServiceTest {
         assertNotNull(foundCTF);
         assertEquals(2, foundCTF.size());
     }
-
+*/
 
     @Test
     public void tesGetAllIdAnimes_thenIdListShouldBeReturned(){
