@@ -7,10 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CTFServiceImpl implements CTFService {
+
     @Autowired
     private CTFRepository ctfRepository;
 
@@ -27,8 +30,7 @@ public class CTFServiceImpl implements CTFService {
                 }
             }
             return mylist;
-        }
-        else {
+        } else {
             for (CTF ctf : ctfRepository.findAll()) {
                 if (genre != null && ctf.getGenre().contains(genre)) {
                     mylist.add(ctf);
@@ -44,7 +46,7 @@ public class CTFServiceImpl implements CTFService {
     @Override
     public List<Integer> getAllIdAnimes() {
         List<Integer> id = new ArrayList<>();
-        for(CTF ctf : ctfRepository.findAll()){
+        for (CTF ctf : ctfRepository.findAll()) {
             id.add(ctf.getAnimeId());
         }
         return id;
@@ -52,11 +54,48 @@ public class CTFServiceImpl implements CTFService {
 
     @Override
     public CTF findAnimeById(int id) {
-        for (CTF ctf : ctfRepository.findAll()){
-            if (ctf.getAnimeId() == id){
-                return ctf;
+        return ctfRepository.findByAnimeId(id);
+    }
+
+    @Override
+    public List<Integer> topId(Integer limit, String genre, String type, String studio, String source, String mainCast) {
+        List<CTF> filterList = new ArrayList<>();
+
+        List<Integer> idList = new ArrayList<>();
+
+        for (CTF ctf : ctfRepository.findAll()) {
+            if (genre != null && ctf.getGenre().contains(genre)) {
+                filterList.add(ctf);
+            }
+            if (genre == null) {
+                filterList.add(ctf);
             }
         }
-        return null;
+
+        filterList = filterList
+                .stream()
+                .sorted(Comparator.comparing(CTF::getRating).reversed())
+                .collect(Collectors.toList());
+
+        if (type != null) {
+            filterList = filterList.stream().filter(ctf -> ctf.getType().equals(type)).collect(Collectors.toList());
+        }
+        if (studio != null) {
+            filterList = filterList.stream().filter(ctf -> ctf.getStudios().equals(studio)).collect(Collectors.toList());
+        }
+        if (source != null) {
+            filterList = filterList.stream().filter(ctf -> ctf.getSource().equals(source)).collect(Collectors.toList());
+        }
+        if (mainCast != null) {
+            filterList = filterList.stream().filter(ctf -> ctf.getMainCast().equals(mainCast)).collect(Collectors.toList());
+        }
+
+        if (limit != null) {
+            for (int i = 0; i < limit; i++) {
+                idList.add(filterList.get(i).getAnimeId());
+            }
+        } else filterList.stream().forEach(ctf -> idList.add(ctf.getAnimeId()));
+
+        return idList;
     }
 }
