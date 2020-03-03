@@ -20,27 +20,24 @@ public class CTFServiceImpl implements CTFService {
     @Override
     public List<CTF> findAll(@RequestParam(name = "limit", required = false) Integer limit, @RequestParam(name = "genre", required = false) String genre) {
         List<CTF> mylist = new ArrayList<>();
-        if (limit != null) {
-            for (int i = 0; i <= limit; i++) {
-                if (genre != null && ctfRepository.findAll().get(i).getGenre().contains(genre)) {
-                    mylist.add(ctfRepository.findAll().get(i));
-                }
-                if (genre == null) {
-                    mylist.add(ctfRepository.findAll().get(i));
-                }
-            }
-            return mylist;
-        } else {
-            for (CTF ctf : ctfRepository.findAll()) {
-                if (genre != null && ctf.getGenre().contains(genre)) {
-                    mylist.add(ctf);
-                } else {
-                    mylist.add(ctf);
-                }
+        List<CTF> limited = new ArrayList<>();
 
+        for (CTF ctf : ctfRepository.findAll()) {
+            if (genre != null && ctf.getGenre().contains(genre)) {
+                mylist.add(ctf);
             }
-            return this.ctfRepository.findAll();
+            if (genre == null) {
+                mylist.add(ctf);
+            }
         }
+        if(limit != null){
+            for (int i = 0; i < limit ; i++) {
+                limited.add(mylist.get(i));
+            }
+            return limited;
+        }
+
+        return mylist;
     }
 
     @Override
