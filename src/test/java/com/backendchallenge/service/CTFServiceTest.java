@@ -48,7 +48,7 @@ public class CTFServiceTest {
         dataTest.setImg("imagetest");
         dataTest.setStudios("studiosTest");
         dataTest.setSource("sourceTest");
-        dataTest.setMainCast("mainCastTest");
+        dataTest.setMain_cast("mainCastTest");
         dataTest.setC1(999);
         dataTest.setC2(666);
         dataTest.setMembers(999);
@@ -63,7 +63,7 @@ public class CTFServiceTest {
         dataTest2.setImg("imagetest2");
         dataTest2.setStudios("studiosTest2");
         dataTest2.setSource("sourceTest2");
-        dataTest2.setMainCast("mainCastTest2");
+        dataTest2.setMain_cast("mainCastTest2");
         dataTest2.setC1(99);
         dataTest2.setC2(66);
         dataTest2.setMembers(99);

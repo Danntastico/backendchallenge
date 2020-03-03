@@ -57,53 +57,13 @@ public class CTFServiceImpl implements CTFService {
         return ctfRepository.findByAnimeId(id);
     }
 
-    @Override
-    public List<Integer> topId(Integer limit, String genre, String type, String studio, String source, String mainCast) {
-        List<CTF> filterList = new ArrayList<>();
 
-        List<Integer> idList = new ArrayList<>();
-
-        for (CTF ctf : ctfRepository.findAll()) {
-            if (genre != null && ctf.getGenre().contains(genre)) {
-                filterList.add(ctf);
-            }
-            if (genre == null) {
-                filterList.add(ctf);
-            }
-        }
-
-        filterList = filterList
-                .stream()
-                .sorted(Comparator.comparing(CTF::getRating).reversed())
-                .collect(Collectors.toList());
-
-        if (type != null) {
-            filterList = filterList.stream().filter(ctf -> ctf.getType().equals(type)).collect(Collectors.toList());
-        }
-        if (studio != null) {
-            filterList = filterList.stream().filter(ctf -> ctf.getStudios().equals(studio)).collect(Collectors.toList());
-        }
-        if (source != null) {
-            filterList = filterList.stream().filter(ctf -> ctf.getSource().equals(source)).collect(Collectors.toList());
-        }
-        if (mainCast != null) {
-            filterList = filterList.stream().filter(ctf -> ctf.getMainCast().equals(mainCast)).collect(Collectors.toList());
-        }
-
-        if (limit != null) {
-            for (int i = 0; i < limit; i++) {
-                idList.add(filterList.get(i).getAnimeId());
-            }
-        } else filterList.stream().forEach(ctf -> idList.add(ctf.getAnimeId()));
-
-        return idList;
-    }
 
     @Override
     public List<CTF> topCTF(Integer limit, String genre, String type, String studio, String source, String mainCast) {
         List<CTF> filterList = new ArrayList<>();
 
-        List<Integer> idList = new ArrayList<>();
+        List<CTF> limited = new ArrayList<>();
 
         for (CTF ctf : ctfRepository.findAll()) {
             if (genre != null && ctf.getGenre().contains(genre)) {
@@ -122,16 +82,35 @@ public class CTFServiceImpl implements CTFService {
         if (type != null) {
             filterList = filterList.stream().filter(ctf -> ctf.getType().equals(type)).collect(Collectors.toList());
         }
-        if (studio != null) {
+        if (studio != null ) {
             filterList = filterList.stream().filter(ctf -> ctf.getStudios().equals(studio)).collect(Collectors.toList());
         }
         if (source != null) {
             filterList = filterList.stream().filter(ctf -> ctf.getSource().equals(source)).collect(Collectors.toList());
         }
+
         if (mainCast != null) {
-            filterList = filterList.stream().filter(ctf -> ctf.getMainCast().equals(mainCast)).collect(Collectors.toList());
+            filterList = filterList.stream().filter(ctf -> ctf.getMain_cast().contains(mainCast)).collect(Collectors.toList());
+        }
+
+        if(limit != null){
+            for (int i = 0; i < limit ; i++) {
+                limited.add(filterList.get(i));
+            }
+            return limited;
         }
 
         return filterList;
+    }
+
+    @Override
+    public List<Integer> topId(Integer limit, String genre, String type, String studio, String source, String mainCast) {
+        List<CTF> filterList;
+        filterList = topCTF(limit, genre, type, studio, source, mainCast);
+        List<Integer> idList = new ArrayList<>();
+
+        filterList.stream().forEach(ctf-> idList.add(ctf.getAnimeId()));
+
+        return idList;
     }
 }
