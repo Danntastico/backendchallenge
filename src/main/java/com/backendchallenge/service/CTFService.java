@@ -19,4 +19,11 @@ public interface CTFService {
                         @RequestParam(name = "studio", required = false) String studio,
                         @RequestParam(name = "source", required = false) String source,
                         @RequestParam(name = "mainCast", required = false) String mainCast);
+
+    List<CTF> topCTF(@RequestParam(name = "limit", required = false) Integer limit,
+                            @RequestParam(name = "genre", required = false) String genre,
+                            @RequestParam(name = "type", required = false) String type,
+                            @RequestParam(name = "studio", required = false) String studio,
+                            @RequestParam(name = "source", required = false) String source,
+                            @RequestParam(name = "mainCast", required = false) String mainCast);
 }
